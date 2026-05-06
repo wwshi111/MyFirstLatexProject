@@ -4,4 +4,15 @@
 *.out
 *.snm
 *.toc
+*.synctex.gz*.aux
+*.log
+*.out
+*.toc
 *.synctex.gz
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb

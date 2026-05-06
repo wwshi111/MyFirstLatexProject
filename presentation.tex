@@ -1,18 +1,21 @@
 % !TeX program = xelatex
-% 上面这行是“魔法注释”，它告诉 VS Code 自动使用 xelatex 编译
+% 上面这行是"魔法注释"，它告诉 VS Code 自动使用 xelatex 编译
 
 \documentclass{beamer}
 
 % --- 中文和主题设置 ---
 \usepackage{ctex} % 使用 ctex 宏包，它能很好地处理中文
-\usetheme{Madrid} % Beamer 的一个经典主题，您可以换成其他 (如: Boadilla, Singapore)
+\usetheme{Madrid} % Beamer 的一个经典主题
 \usecolortheme{default} % 颜色主题
+\usepackage{graphicx} % 用于插入图片
+\usepackage{hyperref} % 用于超链接
+\usepackage{tikz} % 用于绘图
 
 % --- 演示文稿信息 ---
-\title[我的第一个 Beamer]{我的第一个 Beamer 演示文稿} % 方括号里是短标题
-\subtitle{使用 MacTeX + VS Code}
-\author{您的名字}
-\institute{您的学校或组织}
+\title[Git与GitHub]{Git与GitHub应用实战} % 方括号里是短标题
+\subtitle{版本控制与团队协作}
+\author{王惟是}
+\institute{北京师范大学}
 \date{\today}
 
 % --- 文档开始 ---
@@ -23,40 +26,284 @@
   \titlepage % 自动生成标题页
 \end{frame}
 
-% 第二页：目录 (如果需要)
+% 第二页：目录
 \begin{frame}
   \frametitle{目录}
   \tableofcontents % 自动生成目录
 \end{frame}
 
-% --- 正文内容 ---
-
-\section{简介} % 开始第一部分
+% --- 第一部分：Git简介 ---
+\section{什么是Git?}
 
 \begin{frame}
-  \frametitle{什么是 Beamer?} % 这一页的标题
-
-  Beamer 是 LaTeX 的一个文档类，用于创建幻灯片。
-
+  \frametitle{Git简介}
+  
+  Git 是一个分布式版本控制系统，用于跟踪文件的变化并协调多人协作开发。
+  
   \begin{itemize}
-      \item 它可以生成高质量的 PDF。
-      \item 排版数学公式 $E = mc^2$ 非常漂亮。
-      \item 结构清晰。
+      \item \textbf{分布式}: 每个开发者都有完整的仓库副本
+      \item \textbf{高效}: 本地操作，速度快
+      \item \textbf{强大}: 支持分支、合并、回滚等操作
+      \item \textbf{免费开源}: 由 Linus Torvalds 创建
   \end{itemize}
 \end{frame}
 
-\section{我的配置} % 开始第二部分
+\begin{frame}
+  \frametitle{Git的核心概念}
+  
+  \begin{block}{仓库 (Repository)}
+    项目的版本历史和所有文件的集合
+  \end{block}
+  
+  \begin{block}{提交 (Commit)}
+    对文件的一次修改记录，包含作者、时间、修改内容
+  \end{block}
+  
+  \begin{block}{分支 (Branch)}
+    并行开发的独立线路，互不干扰
+  \end{block}
+  
+  \begin{block}{合并 (Merge)}
+    将一个分支的更改整合到另一个分支
+  \end{block}
+\end{frame}
+
+% --- 第二部分：Git常用命令 ---
+\section{Git常用命令}
 
 \begin{frame}
-  \frametitle{我的环境}
-  我正在使用：
-  \begin{enumerate}
-      \item MacTeX (作为编译引擎)
-      \item VS Code (作为编辑器)
-      \item LaTeX Workshop (作为插件)
-  \end{enumerate}
+  \frametitle{基础命令}
+  
+  \begin{itemize}
+      \item \texttt{git init}: 初始化仓库
+      \item \texttt{git clone <url>}: 克隆远程仓库
+      \item \texttt{git status}: 查看工作区状态
+      \item \texttt{git add <file>}: 将文件添加到暂存区
+      \item \texttt{git commit -m "message"}: 提交更改
+      \item \texttt{git push}: 推送到远程仓库
+      \item \texttt{git pull}: 拉取远程更新
+  \end{itemize}
+\end{frame}
 
-  这个组合 \textbf{非常好用}！
+\begin{frame}
+  \frametitle{分支管理命令}
+  
+  \begin{itemize}
+      \item \texttt{git branch}: 查看分支列表
+      \item \texttt{git branch <name>}: 创建分支
+      \item \texttt{git checkout <branch>}: 切换分支
+      \item \texttt{git checkout -b <name>}: 创建并切换分支
+      \item \texttt{git merge <branch>}: 合并分支
+      \item \texttt{git branch -d <name>}: 删除分支
+  \end{itemize}
+  
+  \begin{alertblock}{注意}
+    在合并前确保工作区干净，避免冲突
+  \end{alertblock}
+\end{frame}
+
+\begin{frame}
+  \frametitle{查看历史与回退}
+  
+  \begin{itemize}
+      \item \texttt{git log}: 查看提交历史
+      \item \texttt{git log --oneline}: 简洁的历史记录
+      \item \texttt{git log --graph}: 图形化显示分支
+      \item \texttt{git reset <commit>}: 重置到指定提交
+      \item \texttt{git revert <commit>}: 撤销某次提交
+  \end{itemize}
+\end{frame}
+
+% --- 第三部分：GitHub简介 ---
+\section{什么是GitHub?}
+
+\begin{frame}
+  \frametitle{GitHub简介}
+  
+  GitHub 是一个基于 Git 的代码托管平台，提供了强大的协作功能。
+  
+  \begin{itemize}
+      \item \textbf{代码托管}: 免费的远程仓库服务
+      \item \textbf{协作工具}: Issues、Pull Requests、Code Review
+      \item \textbf{社区}: 世界最大的开源社区
+      \item \textbf{CI/CD}: 集成持续集成和部署
+  \end{itemize}
+  
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{GitHub核心功能}
+  
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{block}{Issues}
+      \begin{itemize}
+          \item 跟踪 bug 和功能需求
+          \item 分配任务给团队成员
+          \item 添加标签和里程碑
+      \end{itemize}
+    \end{block}
+    
+    \column{0.5\textwidth}
+    \begin{block}{Pull Requests}
+      \begin{itemize}
+          \item 代码审查机制
+          \item 讨论和反馈
+          \item 自动化测试集成
+      \end{itemize}
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{GitHub核心功能（续）}
+  
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{block}{Actions}
+      \begin{itemize}
+          \item 自动化工作流
+          \item CI/CD 管道
+          \item 自定义脚本
+      \end{itemize}
+    \end{block}
+    
+    \column{0.5\textwidth}
+    \begin{block}{Projects}
+      \begin{itemize}
+          \item 项目管理看板
+          \item 进度追踪
+          \item 团队协作
+      \end{itemize}
+    \end{block}
+  \end{columns}
+\end{frame}
+
+% --- 第四部分：工作流程 ---
+\section{Git工作流程}
+
+\begin{frame}
+  \frametitle{经典Git工作流程}
+  
+  \begin{figure}
+    \centering
+    \begin{tikzpicture}[node distance=1.5cm]
+      \node (workspace) [rectangle, draw, text width=2cm, text centered] {工作区\\(Workspace)};
+      \node (staging) [rectangle, draw, text width=2cm, text centered, below of=workspace] {暂存区\\(Staging)};
+      \node (local) [rectangle, draw, text width=2cm, text centered, below of=staging] {本地仓库\\(Local Repo)};
+      \node (remote) [rectangle, draw, text width=2cm, text centered, right of=local, xshift=3cm] {远程仓库\\(Remote Repo)};
+      
+      \draw[->] (workspace) -- node[left] {git add} (staging);
+      \draw[->] (staging) -- node[left] {git commit} (local);
+      \draw[->] (local) -- node[below] {git push} (remote);
+      \draw[->] (remote) -- node[above] {git pull} (local);
+    \end{tikzpicture}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Feature Branch工作流}
+  
+  \begin{enumerate}
+      \item 从 main 分支创建 feature 分支
+      \item 在 feature 分支上开发新功能
+      \item 定期从 main 拉取更新
+      \item 完成后创建 Pull Request
+      \item 团队审查代码
+      \item 合并到 main 分支
+      \item 删除 feature 分支
+  \end{enumerate}
+  
+  \begin{alertblock}{最佳实践}
+    保持分支生命周期短，频繁合并
+  \end{alertblock}
+\end{frame}
+
+% --- 第五部分：实际应用 ---
+\section{实际应用案例}
+
+\begin{frame}
+  \frametitle{案例1：个人项目管理}
+  
+  \begin{itemize}
+      \item 初始化本地仓库：\texttt{git init}
+      \item 创建 GitHub 远程仓库
+      \item 关联远程仓库：\texttt{git remote add origin <url>}
+      \item 推送代码：\texttt{git push -u origin main}
+  \end{itemize}
+  
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{案例2：团队协作开发}
+  
+  \begin{columns}
+    \column{0.5\textwidth}
+    \begin{block}{步骤}
+      \begin{enumerate}
+          \item 克隆项目
+          \item 创建功能分支
+          \item 开发功能
+          \item 推送分支
+          \item 创建 PR
+      \end{enumerate}
+    \end{block}
+    
+    \column{0.5\textwidth}
+    \begin{block}{协作要点}
+      \begin{itemize}
+          \item 定期同步更新
+          \item 编写清晰的 commit 信息
+          \item 代码审查
+          \item 解决冲突
+      \end{itemize}
+    \end{block}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{案例3：开源贡献}
+  
+  \begin{enumerate}
+      \item Fork 目标仓库
+      \item 克隆自己的 Fork
+      \item 创建分支并修改
+      \item 推送更改
+      \item 提交 Pull Request
+      \item 等待维护者审查
+  \end{enumerate}
+  
+  \begin{exampleblock}{提示}
+    查看项目的 CONTRIBUTING.md 文件了解贡献指南
+  \end{exampleblock}
+\end{frame}
+
+% --- 第六部分：总结 ---
+\section{总结}
+
+\begin{frame}
+  \frametitle{Git与GitHub要点总结}
+  
+  \begin{itemize}
+      \item Git 是强大的分布式版本控制系统
+      \item GitHub 提供代码托管和协作平台
+      \item 掌握常用命令是高效使用的基础
+      \item 合理的工作流程提升团队协作效率
+      \item 参与开源项目可以提升技能
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{参考资源}
+  
+  \begin{itemize}
+      \item \href{https://git-scm.com/docs}{Git 官方文档}
+      \item \href{https://docs.github.com}{GitHub 文档}
+      \item \href{https://learngitbranching.js.org}{Learn Git Branching}
+      \item \href{https://github.com/github/gitignore}{gitignore 模板}
+  \end{itemize}
 \end{frame}
 
 % 最后一页
@@ -65,6 +312,10 @@
   \centering % 居中
   \Huge % 巨大字体
   感谢观看！
+  
+  \vspace{1cm}
+  \Large
+  \texttt{如有问题，请随时提问}
 \end{frame}
 
 \end{document}

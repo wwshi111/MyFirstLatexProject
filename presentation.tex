@@ -1,0 +1,70 @@
+% !TeX program = xelatex
+% 上面这行是“魔法注释”，它告诉 VS Code 自动使用 xelatex 编译
+
+\documentclass{beamer}
+
+% --- 中文和主题设置 ---
+\usepackage{ctex} % 使用 ctex 宏包，它能很好地处理中文
+\usetheme{Madrid} % Beamer 的一个经典主题，您可以换成其他 (如: Boadilla, Singapore)
+\usecolortheme{default} % 颜色主题
+
+% --- 演示文稿信息 ---
+\title[我的第一个 Beamer]{我的第一个 Beamer 演示文稿} % 方括号里是短标题
+\subtitle{使用 MacTeX + VS Code}
+\author{您的名字}
+\institute{您的学校或组织}
+\date{\today}
+
+% --- 文档开始 ---
+\begin{document}
+
+% 第一页：标题页
+\begin{frame}
+  \titlepage % 自动生成标题页
+\end{frame}
+
+% 第二页：目录 (如果需要)
+\begin{frame}
+  \frametitle{目录}
+  \tableofcontents % 自动生成目录
+\end{frame}
+
+% --- 正文内容 ---
+
+\section{简介} % 开始第一部分
+
+\begin{frame}
+  \frametitle{什么是 Beamer?} % 这一页的标题
+
+  Beamer 是 LaTeX 的一个文档类，用于创建幻灯片。
+
+  \begin{itemize}
+      \item 它可以生成高质量的 PDF。
+      \item 排版数学公式 $E = mc^2$ 非常漂亮。
+      \item 结构清晰。
+  \end{itemize}
+\end{frame}
+
+\section{我的配置} % 开始第二部分
+
+\begin{frame}
+  \frametitle{我的环境}
+  我正在使用：
+  \begin{enumerate}
+      \item MacTeX (作为编译引擎)
+      \item VS Code (作为编辑器)
+      \item LaTeX Workshop (作为插件)
+  \end{enumerate}
+
+  这个组合 \textbf{非常好用}！
+\end{frame}
+
+% 最后一页
+\begin{frame}
+  \frametitle{结束}
+  \centering % 居中
+  \Huge % 巨大字体
+  感谢观看！
+\end{frame}
+
+\end{document}
